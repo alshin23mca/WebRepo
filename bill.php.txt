@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Electricity Bill Calculator</title>
+</head>
+<body>
+
+<?php
+// Function to calculate electricity bill based on consumption and tariff
+function calculateElectricityBill($units, $tariff) {
+    // Define the tariff rates
+    $unitRate = $tariff['unit_rate'];
+    $fixedCharge = $tariff['fixed_charge'];
+
+    // Calculate the bill
+    $bill = ($units * $unitRate) + $fixedCharge;
+
+    return $bill;
+}
+
+// Check if the form is submitted
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Retrieve user input
+    $consumedUnits = isset($_POST['units']) ? floatval($_POST['units']) : 0;
+
+    // Example tariff structure (customize based on your needs)
+    $exampleTariff = array(
+        'unit_rate' => 0.12, // Per unit rate in dollars
+        'fixed_charge' => 15.00 // Fixed charge in dollars
+    );
+
+    // Calculate the electricity bill
+    $electricityBill = calculateElectricityBill($consumedUnits, $exampleTariff);
+
+    // Display the result
+    echo "<p>Your electricity bill is: $" . number_format($electricityBill, 2) . "</p>";
+}
+?>
+
+<!-- HTML form for user input -->
+<form method="post" action="">
+    <label for="units">Enter consumed units:</label>
+    <input type="number" name="units" id="units" required>
+    <button type="submit">Calculate Bill</button>
+</form>
+
+</body>
+</html>
