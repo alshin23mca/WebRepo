@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>event-handling</title>
+  </head>
+    <body bgcolor="powderblue">
+      <center>
+      <h2>Event handling</h2>
+      <p>hello....</p><br>
+      <button id="btn">Try it</button>
+      <p id="demo"></p>
+        </center>
+  <script>
+    var x = document.getElementById("btn");
+    x.addEventListener("mouseover", mouseoverfunction);
+    x.addEventListener("mouseout", mouseOutFunction);
+    x.addEventListener("click", mouseClickFunction);
+
+    function mouseoverfunction()
+    {
+      document.getElementById("demo").innerHTML += "Mouse over!!!<br>";
+    }
+    function mouseOutFunction()
+    {
+
+      document.getElementById("demo").innerHTML += "Moused out!<br>";
+
+    }
+    function mouseClickFunction()
+    {
+
+       document.getElementById("demo").innerHTML += "Clicked!<br>";
+
+   }
+  </script>
+  </body>
+</html>

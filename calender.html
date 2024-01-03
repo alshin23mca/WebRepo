@@ -1,0 +1,62 @@
+<html>
+  <head>
+    <title>Calendar Generator</title>
+  </head>
+  <body>
+ <center><br>
+ <h1><u><i>Calender Generator</i></u></h1>
+    <label for="year">Enter a year (like 2023):</label>
+    <input type="text" id="year"><br><br>
+    <label for="month">Enter a month (1-12):</label>
+    <input type="text" id="month"><br><br>
+    <button onclick="generateCalendar()">Generate Calendar</button>
+ <br><br>
+    <div id="calendar"></div>
+    <script>
+      function generateCalendar() {
+        var year = document.getElementById("year").value;
+        var month = document.getElementById("month").value - 1;
+        var calendar = document.getElementById("calendar");
+        if (isNaN(year) || year < 1 || year > 9999 || isNaN(month) || month < 0 || month > 11) {
+          calendar.innerHTML = "Please enter a valid year and month.";
+          return;
+        }
+        var date = new Date(year, month, 1);
+        var firstDay = date.getDay();
+        var lastDay = new Date(year, month + 1, 0).getDate();
+        var calendarArray = [];
+        var day = 1;
+        for (var i = 0; i < 6; i++) {
+          var week = [];
+          for (var j = 0; j < 7; j++) {
+            if (i === 0 && j < firstDay) {
+              week.push("");
+            } else if (day > lastDay) {
+              week.push("");
+            } else {
+              week.push(day);
+              day++;
+            }
+          }
+          calendarArray.push(week);
+        }
+
+        var calendarHTML = "<table><tr><th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th></tr>";
+        for (var i = 0; i < 6; i++) {
+          calendarHTML += "<tr>";
+          for (var j = 0; j < 7; j++) {
+            if (calendarArray[i][j] === "") {
+              calendarHTML += "<td></td>";
+            } else {
+              calendarHTML += "<td>" + calendarArray[i][j] + "</td>";
+            }
+          }
+          calendarHTML += "</tr>";
+        }
+        calendarHTML += "</table>"
+        calendar.innerHTML =calendarHTML;
+      }
+    </script>
+</center>
+  </body>
+</html>

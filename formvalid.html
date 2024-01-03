@@ -1,40 +1,69 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration Form</title>
+    <title>Form Validation Example</title>
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
 </head>
-<body bgcolor="skyblue">
+<body>
 <center>
-<h2>MCA Registration </h2>
+<h2>Form Validation Example</h2>
 
-<form action="process_registration.php" method="post" onsubmit="return validateForm()">
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="username" required><br><br>
+<form id="myForm" onsubmit="return validateForm()">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name"><br>
+    <span id="nameError" class="error"></span><br>
 
     <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required><br><br>
+    <input type="text" id="email" name="email"><br>
+    <span id="emailError" class="error"></span><br>
 
     <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required><br><br>
+    <input type="password" id="password" name="password">
+    <span id="passwordError" class="error"></span><br><br>
 
-    <label for="confirm_password">Confirm Password:</label>
-    <input type="password" id="confirm_password" name="confirm_password" required><br><br>
-
-    <button type="submit">Register</button><br><br>
+    <input type="submit" value="Submit">
 </form>
 </center>
 <script>
     function validateForm() {
+        // Get form inputs
+        var name = document.getElementById("name").value;
+        var email = document.getElementById("email").value;
         var password = document.getElementById("password").value;
-        var confirmPassword = document.getElementById("confirm_password").value;
 
-        if (password !== confirmPassword) {
-            alert("Password and confirm password do not match.");
+        // Reset error messages
+        document.getElementById("nameError").innerHTML = "";
+        document.getElementById("emailError").innerHTML = "";
+        document.getElementById("passwordError").innerHTML = "";
+
+        // Validate Name
+        if (name === "") {
+            document.getElementById("nameError").innerHTML = "Name is required";
             return false;
         }
 
+        // Validate Email
+        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!email.match(emailRegex)) {
+            document.getElementById("emailError").innerHTML = "Invalid email address";
+            return false;
+        }
+
+
+        if (password.length < 8)
+        {
+            document.getElementById("passwordError").innerHTML = "Password must be at least 8 characters";
+            return false;
+        }
+
+        // If all validations pass, the form is submitted
+        alert("Form submitted successfully!");
         return true;
     }
 </script>

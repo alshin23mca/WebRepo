@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiple Choice Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .quiz-container {
+            background-color: purple;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            color: white;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            width: 100%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body bgcolor="powderblue">
+
+  <h1 align="center"><i>Online Examination</i></h1>
+<div class="quiz-container">
+
+    <h2>Multiple Choice Quiz</h2>
+    <p><i>Enter submit to attend next question.</i></p>
+    <form id="quizForm">
+        <div id="question"></div>
+        <div id="options"></div><br>
+        <button type="button" onclick="checkAnswer()">Submit Answer</button>
+    </form>
+    <p id="result"></p>
+</div>
+
+<script>
+    // Sample quiz data
+    const quizData = [
+        {
+            question: "What is the capital of France?",
+            options: ["Berlin", "Madrid", "Paris", "Rome"],
+            correctAnswer: "Paris"
+        },
+        {
+            question: "Which planet is known as the Red Planet?",
+            options: ["Earth", "Mars", "Venus", "Jupiter"],
+            correctAnswer: "Mars"
+        },
+        {
+            question: "What is the largest mammal in the world?",
+            options: ["Elephant", "Blue Whale", "Giraffe", "Hippopotamus"],
+            correctAnswer: "Blue Whale"
+        }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+
+    function loadQuestion() {
+        const questionDiv = document.getElementById("question");
+        const optionsDiv = document.getElementById("options");
+        const currentQuizData = quizData[currentQuestion];
+
+        questionDiv.textContent = currentQuizData.question;
+
+        optionsDiv.innerHTML = "";
+        currentQuizData.options.forEach((option, index) => {
+            const radioBtn = document.createElement("input");
+            radioBtn.type = "radio";
+            radioBtn.name = "answer";
+            radioBtn.value = option;
+
+            const label = document.createElement("label");
+            label.textContent = option;
+
+            optionsDiv.appendChild(radioBtn);
+            optionsDiv.appendChild(label);
+            optionsDiv.appendChild(document.createElement("br"));
+        });
+    }
+
+    function checkAnswer() {
+        const selectedOption = document.querySelector('input[name="answer"]:checked');
+
+        if (selectedOption) {
+            const userAnswer = selectedOption.value;
+            const correctAnswer = quizData[currentQuestion].correctAnswer;
+
+            if (userAnswer === correctAnswer) {
+                score++;
+            }
+
+            currentQuestion++;
+            if (currentQuestion < quizData.length) {
+                loadQuestion();
+            } else {
+                showResult();
+            }
+        }
+    }
+
+    function showResult() {
+        const resultDiv = document.getElementById("result");
+        resultDiv.textContent = `Your score: ${score} out of ${quizData.length}`;
+    }
+
+    // Initial load
+    loadQuestion();
+</script>
+
+</body>
+</html>
