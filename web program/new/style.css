@@ -1,0 +1,40 @@
+
+#header {
+    background-color: #f3f3f3;
+    padding: 20px;
+}
+
+#menu {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+}
+
+#menu ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#menu ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+#menu a {
+    text-decoration: none;
+    color: #fff;
+}
+
+#introduction, #attractions, #images {
+    margin: 20px;
+    padding: 20px;
+    background-color:#fff;
+    border: 1px solid #ccc;
+}
+
+#footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+}

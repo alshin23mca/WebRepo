@@ -1,0 +1,55 @@
+
+<html>
+<head>
+    <title>Math Functions</title>
+</head>
+<body bgcolor="lightgrey">
+  <center>
+    <h1>Math Functions</h1>
+
+    <label for="numberInput">Enter a number: </label>
+    <input type="text" id="numberInput" placeholder="Enter a number">
+    <button onclick="performMathFunctions()">Click</button>
+
+    <div id="result"></div>
+
+    <script>
+        function performMathFunctions() {
+            const numberInput = document.getElementById("numberInput").value;
+            const number = parseFloat(numberInput);
+
+            if (isNaN(number))
+            {
+                document.getElementById("result").textContent = "Invalid input";
+            }
+             else
+             {
+                const roundedNumber = Math.round(number);
+                const ceil = Math.ceil(number);
+                const trunc=Math.trunc(number);
+                const sign=Math.sign(number);
+                /*const power=Math.pow(number);*/
+                const square=Math.sqrt(number);
+                const absolutevalue=Math.abs(number);
+                const random=Math.random(number);
+                const log=Math.log(number);
+
+                document.getElementById("result").innerHTML = `
+                    <br>
+                    Number: ${number} <br>
+                    Rounded: ${roundedNumber} <br>
+                    Ceil: ${ceil} <br>
+                    Truncate: ${trunc}<br>
+                    Sign: ${sign}<br>
+                    Square: ${square}<br>
+                    Truncate: ${trunc}<br>
+                    Absolute Value: ${absolutevalue}<br>
+                    Random: ${random}<br>
+                    Log: ${log}<br>
+                `;
+            }
+        }
+    </script>
+  </center>
+</body>
+</html>
